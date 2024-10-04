@@ -1,7 +1,17 @@
 from tkinter import *
 
 def open_dashboard():
-    pass
+    dashboard = Tk()
+    dashboard_width=400
+    dashboard_height=400
+    pos_x = (dashboard.winfo_screenwidth()//2) - (dashboard_width//2)
+    pos_y = (dashboard.winfo_screenheight()//2)-(dashboard_height//2)
+    dashboard.geometry(f"{dashboard_width}x{dashboard_height}+{pos_x}+{pos_y}")
+    dashboard.title("Dashboard")
+    dashboard.config(bg="lightblue")
+    dashboard.iconbitmap("logo.ico")
+
+    dashboard.mainloop()
 
 def open_splash_screen():
     splash_screen = Tk()
