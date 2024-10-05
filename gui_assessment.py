@@ -9,24 +9,41 @@ class Add_Expense(Tk):
         self.config(bg="lightblue")
         self.iconbitmap("logo.ico")
         self.resizable(False, False)
+        self.load_form()
         
+    def load_form(self):
 
+        # using grid layout
+        self.grid_columnconfigure(0, weight=1)
+        self.grid_columnconfigure(1, weight=1)
+        self.grid_columnconfigure(2, weight=2)
+        
+        self.grid_rowconfigure(0, weight=1)
+        self.grid_rowconfigure(5, weight=1)
+
+        Label(
+            self, 
+            text="Add New Expense From Here", 
+            font="comicsansms 16 bold"
+            ).grid(row=0, column=0, columnspan=4)
+        self.expense_title_label = Label(self, text="Title ")
+        self.expense_used_label = Label(self, text="Expense ")
+        self.expense_title_label.grid(row=2, column=1, sticky="e")
+        self.expense_used_label.grid(row=3, column=1, sticky="e")
+        # need to add here a dropdown
+        self.expense_title = StringVar()
+        self.expense_used = StringVar()
+
+        self.expense_title_entry = Entry(self, textvariable=self.expense_title)
+        self.expense_used_entry = Entry(self, textvariable=self.expense_used)
+        self.expense_title_entry.grid(row=2, column=2, sticky="w", padx=20, pady=3, ipady=3)
+        self.expense_used_entry.grid(row=3, column=2, sticky="w", padx=20, pady=3, ipady=3)
+        
+        
 def open_add_new_expense_form():
     # closing the previous window
     dashboard.destroy()
     new_expense_form = Add_Expense(400, 400)
-
-    # new_expense_form = Tk()
-    # new_expense_form_width=400
-    # new_expense_form_height=400
-    # pos_x = (new_expense_form.winfo_screenwidth()//2) - (new_expense_form_width//2)
-    # pos_y = (new_expense_form.winfo_screenheight()//2)-(new_expense_form_height//2)
-    # new_expense_form.geometry(f"{new_expense_form_width}x{new_expense_form_height}+{pos_x}+{pos_y}")
-    # new_expense_form.title("New Expense")
-    # new_expense_form.config(bg="lightblue")
-    # new_expense_form.iconbitmap("logo.ico")
-    # new_expense_form.resizable(False, False)
-
     new_expense_form.mainloop()
 
 def open_dashboard():
@@ -85,4 +102,6 @@ def open_splash_screen():
     splash_screen.mainloop()
 
 if __name__ == "__main__":
-    open_splash_screen()
+    #open_splash_screen()
+    test = Add_Expense(410, 400)
+    test.mainloop()
