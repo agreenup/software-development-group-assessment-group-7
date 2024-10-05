@@ -1,2 +1,3 @@
 lunch,1500,Food & Groceries
 dinner,1500,Food & Groceries
+buffet,890,Food & Groceries

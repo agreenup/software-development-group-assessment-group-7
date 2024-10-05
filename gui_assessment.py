@@ -61,15 +61,24 @@ class Add_Expense(Tk):
 
         
     def saveExpenseInFile(self):
+        title = self.expense_title.get()
+        expense = self.expense_used.get()
         category = self.expense_category.get()
-        with open("expense.txt", "a") as f:
-            f.write(self.expense_title.get()+","+self.expense_used.get()+","+category+"\n")
-            f.close()
-        tmsg.showinfo("Congratulations", "Expense has been added in the system")
-        
+        if len(title)!=0 and len(expense)!=0 and category!="Select Category":
+            category = self.expense_category.get()
+            with open("expense.txt", "a") as f:
+                f.write(title+","+expense+","+category+"\n")
+                f.close()
+            tmsg.showinfo("Congratulations", "Expense has been added in the system")
+            self.expense_title.set("")
+            self.expense_used.set("")
+            self.expense_category.set("Select Category")
+        else:
+            tmsg.showerror("Error", "Something is missing in the form")
 
     def openDashboard(self):
-        pass
+        self.destroy()
+        open_dashboard()
         
 def open_add_new_expense_form():
     # closing the previous window
