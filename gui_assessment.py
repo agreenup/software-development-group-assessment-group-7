@@ -94,9 +94,13 @@ class Manage_Expense(Tk):
 
         self.expenses = self.load_expenses_from_file()
         
-        
+        # set data on the table
+        for expense in self.expenses:
+            table.insert("", END, values=expense)
 
         table.pack()
+
+        
 
     def load_expenses_from_file(self):
         expenses_tuples = []
