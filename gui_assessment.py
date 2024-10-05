@@ -10,16 +10,17 @@ def open_dashboard():
     dashboard.title("Dashboard")
     dashboard.config(bg="lightblue")
     dashboard.iconbitmap("logo.ico")
+    dashboard.resizable(False, False)
 
     # adding two buttons for navigation i.e. Add New Expense and View History
     center_frame = Frame(dashboard)
     center_frame.config(bg="lightblue")
     center_frame.pack(pady=80)
 
-    btn_add_new_expense = Button(center_frame, text="Add New Expense")
+    btn_add_new_expense = Button(center_frame, text="Add New Expense", bg="red")
     btn_add_new_expense.pack(side="left", padx=10)
 
-    btn_view_history = Button(center_frame, text="View History")
+    btn_view_history = Button(center_frame, text="View History", bg="red")
     btn_view_history.pack(side="left", padx=10)
 
     dashboard.mainloop()
@@ -32,6 +33,8 @@ def open_splash_screen():
     pos_y = (splash_screen.winfo_screenheight()//2)-(splash_screen_height//2)
     splash_screen.title("Expense Management App")
     splash_screen.iconbitmap("logo.ico")
+    splash_screen.geometry(f"{splash_screen_width}x{splash_screen_height}+{pos_x}+{pos_y}")
+    splash_screen.resizable(False, False)
     title_label = Label(
         text="Expense Management\n\nLoading...", 
         bg="lightblue", 
@@ -44,10 +47,11 @@ def open_splash_screen():
         )
     title_label.pack()
     
-    splash_screen.geometry(f"{splash_screen_width}x{splash_screen_height}+{pos_x}+{pos_y}")
+    
     splash_screen.after(3000, open_dashboard)
     splash_screen.after(3000, splash_screen.destroy)
     
     splash_screen.mainloop()
 
-open_splash_screen()
+if __name__ == "__main__":
+    open_splash_screen()
