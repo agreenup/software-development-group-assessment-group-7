@@ -1,6 +1,25 @@
 from tkinter import *
 
+def open_add_new_expense_form():
+    # closing the previous window
+    dashboard.destroy()
+
+    new_expense_form = Tk()
+    new_expense_form_width=400
+    new_expense_form_height=400
+    pos_x = (new_expense_form.winfo_screenwidth()//2) - (new_expense_form_width//2)
+    pos_y = (new_expense_form.winfo_screenheight()//2)-(new_expense_form_height//2)
+    new_expense_form.geometry(f"{new_expense_form_width}x{new_expense_form_height}+{pos_x}+{pos_y}")
+    new_expense_form.title("New Expense")
+    new_expense_form.config(bg="lightblue")
+    new_expense_form.iconbitmap("logo.ico")
+    new_expense_form.resizable(False, False)
+    new_expense_form.mainloop()
+
+
+
 def open_dashboard():
+    global dashboard
     dashboard = Tk()
     dashboard_width=400
     dashboard_height=200
@@ -12,12 +31,13 @@ def open_dashboard():
     dashboard.iconbitmap("logo.ico")
     dashboard.resizable(False, False)
 
-    # adding two buttons for navigation i.e. Add New Expense and View History
+    # Frame is used to make the buttons horizontal on the window
     center_frame = Frame(dashboard)
     center_frame.config(bg="lightblue")
     center_frame.pack(pady=80)
 
-    btn_add_new_expense = Button(center_frame, text="Add New Expense", bg="red")
+    # adding two buttons for navigation i.e. Add New Expense and View History
+    btn_add_new_expense = Button(center_frame, text="Add New Expense", bg="red", command=open_add_new_expense_form)
     btn_add_new_expense.pack(side="left", padx=10)
 
     btn_view_history = Button(center_frame, text="View History", bg="red")
