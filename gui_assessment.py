@@ -1,8 +1,8 @@
 from tkinter import *
-from tkinter import ttk
+from tkinter import ttk 
 import tkinter.messagebox as tmsg
 
-class Add_Expense(Tk):
+class Manage_Expense(Tk):
     def __init__(self, width, height):
         super().__init__()
         pos_x = (self.winfo_screenwidth()//2) - (width//2)
@@ -10,10 +10,9 @@ class Add_Expense(Tk):
         self.geometry(f"{width}x{height}+{pos_x}+{pos_y}")
         self.iconbitmap("logo.ico")
         self.resizable(False, False)
-        self.load_form()
+        # self.load_form()
         
     def load_form(self):
-
         # using grid layout
         self.grid_columnconfigure(0, weight=1)
         self.grid_columnconfigure(1, weight=1)
@@ -27,6 +26,7 @@ class Add_Expense(Tk):
             text="Add New Expense From Here", 
             font="comicsansms 16 bold"
             ).grid(row=0, column=0, columnspan=4)
+        
         self.expense_title_label = Label(self, text="Title : ")
         self.expense_used_label = Label(self, text="Expense : ")
         self.expense_category_label = Label(self, text="Category : ")
@@ -58,7 +58,6 @@ class Add_Expense(Tk):
         btnAdd = Button(self.frame, text="Add Expense", command=self.saveExpenseInFile)
         btnAdd.pack(side="left", ipady=5, padx=5)
         
-
         
     def saveExpenseInFile(self):
         title = self.expense_title.get()
@@ -79,12 +78,30 @@ class Add_Expense(Tk):
     def openDashboard(self):
         self.destroy()
         open_dashboard()
+
+    def load_history(self):
+        self.title("All Expenses")
+        table = ttk.Treeview(self, columns=["Title","Expense","Category"], show="headings")
+        table.heading("Title", text="Title")
+        table.heading("Expense", text="Expense")
+        table.heading("Category", text="Category")
+        
+
+        table.pack()
+
         
 def open_add_new_expense_form():
     # closing the previous window
     dashboard.destroy()
-    new_expense_form = Add_Expense(400, 400)
+    new_expense_form = Manage_Expense(400, 400)
+    new_expense_form.load_form()
     new_expense_form.mainloop()
+
+def open_history_of_expenses():
+    dashboard.destroy()
+    history_window = Manage_Expense(400, 400)
+    history_window.load_history()
+    history_window.mainloop()
 
 def open_dashboard():
     global dashboard
@@ -95,20 +112,20 @@ def open_dashboard():
     pos_y = (dashboard.winfo_screenheight()//2)-(dashboard_height//2)
     dashboard.geometry(f"{dashboard_width}x{dashboard_height}+{pos_x}+{pos_y}")
     dashboard.title("Dashboard")
-    dashboard.config(bg="lightblue")
+    # dashboard.config(bg="lightblue")
     dashboard.iconbitmap("logo.ico")
     dashboard.resizable(False, False)
 
     # Frame is used to make the buttons horizontal on the window
     center_frame = Frame(dashboard)
-    center_frame.config(bg="lightblue")
+    # center_frame.config(bg="lightblue")
     center_frame.pack(pady=80)
 
     # adding two buttons for navigation i.e. Add New Expense and View History
     btn_add_new_expense = Button(center_frame, text="Add New Expense", bg="red", command=open_add_new_expense_form)
     btn_add_new_expense.pack(side="left", padx=10)
 
-    btn_view_history = Button(center_frame, text="View History", bg="red")
+    btn_view_history = Button(center_frame, text="View History", bg="red", command=open_history_of_expenses)
     btn_view_history.pack(side="left", padx=10)
 
     dashboard.mainloop()
@@ -125,8 +142,8 @@ def open_splash_screen():
     splash_screen.resizable(False, False)
     title_label = Label(
         text="Expense Management\n\nLoading...", 
-        bg="lightblue", 
-        fg="white",
+        
+        fg="black",
         padx=100,
         pady=300,
         font=("comicsansms", 19, "bold"),
@@ -142,6 +159,5 @@ def open_splash_screen():
     splash_screen.mainloop()
 
 if __name__ == "__main__":
-    #open_splash_screen()
-    test = Add_Expense(410, 400)
-    test.mainloop()
+    open_splash_screen()
+   
