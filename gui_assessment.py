@@ -3,13 +3,24 @@ from tkinter import *
 def open_dashboard():
     dashboard = Tk()
     dashboard_width=400
-    dashboard_height=400
+    dashboard_height=200
     pos_x = (dashboard.winfo_screenwidth()//2) - (dashboard_width//2)
     pos_y = (dashboard.winfo_screenheight()//2)-(dashboard_height//2)
     dashboard.geometry(f"{dashboard_width}x{dashboard_height}+{pos_x}+{pos_y}")
     dashboard.title("Dashboard")
     dashboard.config(bg="lightblue")
     dashboard.iconbitmap("logo.ico")
+
+    # adding two buttons for navigation i.e. Add New Expense and View History
+    center_frame = Frame(dashboard)
+    center_frame.config(bg="lightblue")
+    center_frame.pack(pady=80)
+
+    btn_add_new_expense = Button(center_frame, text="Add New Expense")
+    btn_add_new_expense.pack(side="left", padx=10)
+
+    btn_view_history = Button(center_frame, text="View History")
+    btn_view_history.pack(side="left", padx=10)
 
     dashboard.mainloop()
 
