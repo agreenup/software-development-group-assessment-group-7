@@ -7,7 +7,6 @@ class Add_Expense(Tk):
         pos_x = (self.winfo_screenwidth()//2) - (width//2)
         pos_y = (self.winfo_screenheight()//2)-(height//2)
         self.geometry(f"{width}x{height}+{pos_x}+{pos_y}")
-        self.config(bg="lightblue")
         self.iconbitmap("logo.ico")
         self.resizable(False, False)
         self.load_form()
@@ -20,7 +19,7 @@ class Add_Expense(Tk):
         self.grid_columnconfigure(2, weight=2)
         
         self.grid_rowconfigure(0, weight=1)
-        self.grid_rowconfigure(5, weight=1)
+        self.grid_rowconfigure(6, weight=1)
 
         Label(
             self, 
@@ -50,8 +49,22 @@ class Add_Expense(Tk):
         self.expense_category.set("Select Category")
 
         # add buttons
+        self.frame = Frame(self)
+        self.frame.grid(row=5, column=2, sticky="w")
+
+        btnCancel = Button(self.frame, text="Cancel", command=self.openDashboard)
+        btnCancel.pack(side="left", ipady=5, padx=15)
+        btnAdd = Button(self.frame, text="Add Expense", command=self.saveExpenseInFile)
+        btnAdd.pack(side="left", ipady=5, padx=5)
         
+
         
+
+    def saveExpenseInFile(self):
+        pass
+
+    def openDashboard(self):
+        pass
         
 def open_add_new_expense_form():
     # closing the previous window
