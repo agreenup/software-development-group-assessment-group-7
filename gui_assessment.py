@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import ttk
 
 class Add_Expense(Tk):
     def __init__(self, width, height):
@@ -26,18 +27,30 @@ class Add_Expense(Tk):
             text="Add New Expense From Here", 
             font="comicsansms 16 bold"
             ).grid(row=0, column=0, columnspan=4)
-        self.expense_title_label = Label(self, text="Title ")
-        self.expense_used_label = Label(self, text="Expense ")
+        self.expense_title_label = Label(self, text="Title : ")
+        self.expense_used_label = Label(self, text="Expense : ")
+        self.expense_category_label = Label(self, text="Category : ")
         self.expense_title_label.grid(row=2, column=1, sticky="e")
         self.expense_used_label.grid(row=3, column=1, sticky="e")
+        self.expense_category_label.grid(row=4, column=1, sticky="e")
         # need to add here a dropdown
         self.expense_title = StringVar()
         self.expense_used = StringVar()
 
         self.expense_title_entry = Entry(self, textvariable=self.expense_title)
         self.expense_used_entry = Entry(self, textvariable=self.expense_used)
-        self.expense_title_entry.grid(row=2, column=2, sticky="w", padx=20, pady=3, ipady=3)
-        self.expense_used_entry.grid(row=3, column=2, sticky="w", padx=20, pady=3, ipady=3)
+        self.categories = ["Food & Groceries", "Transportation", "Housing", "Utilities & Bills", "Healthcare",
+                            "Entertainment & Leisure", "Education", "Clothing & Personal", "Insurance", "Saving & Investment",
+                            "Debt Repayment","Miscellaneous","Gifts & Donations","Travel","Bussiness",
+                            "Family and Childcare","Taxes"]
+        self.expense_category = ttk.Combobox(self, values=self.categories)
+        self.expense_title_entry.grid(row=2, column=2, sticky="w", padx=20, pady=3, ipady=3, ipadx=10)
+        self.expense_used_entry.grid(row=3, column=2, sticky="w", padx=20, pady=3, ipady=3, ipadx=10)
+        self.expense_category.grid(row=4, column=2, sticky="w", padx=20, pady=3, ipady=3)
+        self.expense_category.set("Select Category")
+
+        # add buttons
+        
         
         
 def open_add_new_expense_form():
