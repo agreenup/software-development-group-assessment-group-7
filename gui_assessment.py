@@ -82,12 +82,32 @@ class Manage_Expense(Tk):
     def load_history(self):
         self.title("All Expenses")
         table = ttk.Treeview(self, columns=["Title","Expense","Category"], show="headings")
+        # titles of all the columns
         table.heading("Title", text="Title")
         table.heading("Expense", text="Expense")
         table.heading("Category", text="Category")
+
+        # width of all the columns
+        table.column("Title", width=120)
+        table.column("Expense", width=110)
+        table.column("Category", width=170)
+
+        self.expenses = self.load_expenses_from_file()
+        
         
 
         table.pack()
+
+    def load_expenses_from_file(self):
+        expenses_tuples = []
+        with open("expense.txt", "r") as f:
+            all_records = f.readlines()
+
+            for record in all_records:
+                arr = record.strip().split(',')
+                expenses_tuples.append((arr[0], arr[1], arr[2]))
+
+        return expenses_tuples
 
         
 def open_add_new_expense_form():
