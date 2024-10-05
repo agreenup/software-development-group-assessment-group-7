@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import ttk
+import tkinter.messagebox as tmsg
 
 class Add_Expense(Tk):
     def __init__(self, width, height):
@@ -59,9 +60,13 @@ class Add_Expense(Tk):
         
 
         
-
     def saveExpenseInFile(self):
-        pass
+        category = self.expense_category.get()
+        with open("expense.txt", "a") as f:
+            f.write(self.expense_title.get()+","+self.expense_used.get()+","+category+"\n")
+            f.close()
+        tmsg.showinfo("Congratulations", "Expense has been added in the system")
+        
 
     def openDashboard(self):
         pass
