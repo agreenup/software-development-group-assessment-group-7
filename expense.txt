@@ -1,3 +1,2 @@
-lunch,1500,Food & Groceries
-dinner,1500,Food & Groceries
-buffet,890,Food & Groceries
+lunch,1500,Food & Groceries,2024-10-06
+travel,1000,Transportation,2024-10-06

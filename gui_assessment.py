@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import ttk 
 import tkinter.messagebox as tmsg
+from datetime import date
 
 class Manage_Expense(Tk):
     def __init__(self, width, height):
@@ -66,7 +67,7 @@ class Manage_Expense(Tk):
         if len(title)!=0 and len(expense)!=0 and category!="Select Category":
             category = self.expense_category.get()
             with open("expense.txt", "a") as f:
-                f.write(title+","+expense+","+category+"\n")
+                f.write(title+","+expense+","+category+","+str(date.today())+"\n")
                 f.close()
             tmsg.showinfo("Congratulations", "Expense has been added in the system")
             self.expense_title.set("")
@@ -84,16 +85,18 @@ class Manage_Expense(Tk):
         
         Button(self, text="Dashboard", command=self.openDashboard).pack(pady=30)
         
-        table = ttk.Treeview(self, columns=["Title","Expense","Category"], show="headings")
+        table = ttk.Treeview(self, columns=["Title","Expense","Category", "Date"], show="headings")
         # titles of all the columns
         table.heading("Title", text="Title")
         table.heading("Expense", text="Expense")
         table.heading("Category", text="Category")
+        table.heading("Date", text="Date")
 
         # width of all the columns
-        table.column("Title", width=120)
-        table.column("Expense", width=110)
-        table.column("Category", width=170)
+        table.column("Title", width=110)
+        table.column("Expense", width=100)
+        table.column("Category", width=140)
+        table.column("Date", width=75)
 
         self.expenses = self.load_expenses_from_file()
         
@@ -103,9 +106,6 @@ class Manage_Expense(Tk):
 
         table.pack()
 
-        
-
-        
 
     def load_expenses_from_file(self):
         expenses_tuples = []
@@ -114,7 +114,7 @@ class Manage_Expense(Tk):
 
             for record in all_records:
                 arr = record.strip().split(',')
-                expenses_tuples.append((arr[0], arr[1], arr[2]))
+                expenses_tuples.append((arr[0], arr[1], arr[2], arr[3]))
 
         return expenses_tuples
 
@@ -128,7 +128,7 @@ def open_add_new_expense_form():
 
 def open_history_of_expenses():
     dashboard.destroy()
-    history_window = Manage_Expense(400, 400)
+    history_window = Manage_Expense(500,400)
     history_window.load_history()
     history_window.mainloop()
 
@@ -151,10 +151,10 @@ def open_dashboard():
     center_frame.pack(pady=80)
 
     # adding two buttons for navigation i.e. Add New Expense and View History
-    btn_add_new_expense = Button(center_frame, text="Add New Expense", bg="red", command=open_add_new_expense_form)
+    btn_add_new_expense = Button(center_frame, text="Add New Expense", command=open_add_new_expense_form)
     btn_add_new_expense.pack(side="left", padx=10)
 
-    btn_view_history = Button(center_frame, text="View History", bg="red", command=open_history_of_expenses)
+    btn_view_history = Button(center_frame, text="View History", command=open_history_of_expenses)
     btn_view_history.pack(side="left", padx=10)
 
     dashboard.mainloop()
