@@ -81,6 +81,9 @@ class Manage_Expense(Tk):
 
     def load_history(self):
         self.title("All Expenses")
+        
+        Button(self, text="Dashboard", command=self.openDashboard).pack(pady=30)
+        
         table = ttk.Treeview(self, columns=["Title","Expense","Category"], show="headings")
         # titles of all the columns
         table.heading("Title", text="Title")
@@ -99,6 +102,8 @@ class Manage_Expense(Tk):
             table.insert("", END, values=expense)
 
         table.pack()
+
+        
 
         
 
