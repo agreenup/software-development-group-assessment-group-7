@@ -100,12 +100,21 @@ class Manage_Expense(Tk):
 
         self.expenses = self.load_expenses_from_file()
         
-        # set data on the table
+        
+        # to show total expense
+        total_expense = 0
+
+        # set data on the table and adding the expense in total_expense
         for expense in self.expenses:
             table.insert("", END, values=expense)
+            total_expense += int(expense[1])
 
         table.pack()
 
+        Label(self, text="Total : "+str(total_expense), font="comicsansms 16 bold").pack(pady=20)
+
+        
+        
 
     def load_expenses_from_file(self):
         expenses_tuples = []
