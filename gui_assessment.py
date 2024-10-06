@@ -14,6 +14,7 @@ class Manage_Expense(Tk):
         # self.load_form()
         
     def load_form(self):
+        self.title("New Expense")
         # using grid layout
         self.grid_columnconfigure(0, weight=1)
         self.grid_columnconfigure(1, weight=1)

@@ -1,2 +1,3 @@
 lunch,1500,Food & Groceries,2024-10-06
 travel,1000,Transportation,2024-10-06
+Tour,14000,Entertainment & Leisure,2024-10-06
